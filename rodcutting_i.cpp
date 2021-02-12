@@ -51,6 +51,25 @@ double distform(int x, int y, int z, int w) {//(x1,y1,x2,y2)
 int dx[]={0,1,1,1,0,-1,-1,-1};
 int dy[]={1,1,0,-1,-1,-1,0,1};
 
+//1d approach
+int solve2(int n, vector<int>v){
+    int dp[n+1];
+    memset(dp,0,sizeof(dp));
+
+    for(int i=1;i<=n;i++){
+        // you're making a rod of length "i"
+        dp[i]=v[i-1];
+        for(int j=0;j<i;j++){
+            //going thru the other combinations to make find max profit for i 
+            //consider price of "j" and the dp[i-j]
+                dp[i]=max(dp[i],dp[i-j]+v[j-1]);
+        }
+    }
+
+    return dp[n];
+}
+
+
 int  solve(){
     int n;
     cin>>n;
